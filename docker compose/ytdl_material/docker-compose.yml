@@ -1,0 +1,27 @@
+version: "2"
+services:
+    ytdl_material:
+        environment: 
+            ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
+            ytdl_use_local_db: 'false'
+            write_ytdl_config: 'true'
+        restart: always
+        depends_on:
+            - ytdl-mongo-db
+        volumes:
+            - /srv/docker/ytdl_material/appdata:/app/appdata
+            - /data/media/youtube/audio:/app/audio
+            - /data/media/youtube/video:/app/video
+            - /data/media/youtube/subscriptions:/app/subscriptions
+            - /data/media/youtube/users:/app/users
+        ports:
+            - "8998:17442"
+        image: tzahi12345/youtubedl-material:latest
+    ytdl-mongo-db:
+        image: mongo:4
+        logging:
+            driver: "none"          
+        container_name: mongo-db
+        restart: always
+        volumes:
+            - /data/media/youtube/db:/data/db
