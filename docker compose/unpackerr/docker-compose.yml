@@ -1,0 +1,12 @@
+version: "3.2"
+services:
+    unpackerr:
+    container_name: unpackerr
+    image: cr.hotio.dev/hotio/unpackerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/unpackerr:/config

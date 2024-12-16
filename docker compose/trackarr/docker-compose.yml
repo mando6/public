@@ -1,0 +1,14 @@
+version: "3.2"
+services:
+    trackarr:
+    container_name: trackarr
+    image: cr.hotio.dev/hotio/trackarr
+    ports:
+      -7337:7337
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /docker/appdata/trackarr:/config
